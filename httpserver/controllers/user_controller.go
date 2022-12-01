@@ -33,13 +33,13 @@ func NewUserController(
 }
 
 // Register godoc
-// @Tags    User
-// @Summary create a user
-// @Param   user body     dto.UpsertUserDto true "Create User DTO"
-// @Success 201  {object} utils.HttpSuccess[dto.UpsertUserDto]
-// @Failure 400  {object} utils.HttpError
-// @Failure 500  {object} utils.HttpError
-// @Router  /user/register [post]
+//	@Tags		User
+//	@Summary	create a user
+//	@Param		user	body		dto.UpsertUserDto	true	"Create User DTO"
+//	@Success	201		{object}	utils.HttpSuccess[dto.UpsertUserDto]
+//	@Failure	400		{object}	utils.HttpError
+//	@Failure	500		{object}	utils.HttpError
+//	@Router		/user/register [post]
 func (c *userController) Register(ctx *gin.Context) {
 	var dto dto.UpsertUserDto
 	err := ctx.BindJSON(&dto)
@@ -59,13 +59,13 @@ func (c *userController) Register(ctx *gin.Context) {
 }
 
 // Login godoc
-// @Tags    User
-// @Summary login a user
-// @Param   user body     dto.LoginDto true "Login User DTO"
-// @Success 200  {object} utils.HttpSuccess[models.LoginResponse]
-// @Failure 400  {object} utils.HttpError
-// @Failure 500  {object} utils.HttpError
-// @Router  /user/login [post]
+//	@Tags		User
+//	@Summary	login a user
+//	@Param		user	body		dto.LoginDto	true	"Login User DTO"
+//	@Success	200		{object}	utils.HttpSuccess[models.LoginResponse]
+//	@Failure	400		{object}	utils.HttpError
+//	@Failure	500		{object}	utils.HttpError
+//	@Router		/user/login [post]
 func (c *userController) Login(ctx *gin.Context) {
 	var dto dto.LoginDto
 	err := ctx.BindJSON(&dto)
@@ -102,14 +102,14 @@ func (c *userController) Login(ctx *gin.Context) {
 }
 
 // UpdateUser godoc
-// @Tags     User
-// @Summary  create a user
-// @Param    user body     dto.UpsertUserDto true "Update User Based On Token"
-// @Success  200  {object} utils.HttpSuccess[dto.UpsertUserDto]
-// @Failure  400  {object} utils.HttpError
-// @Failure  500  {object} utils.HttpError
-// @Router   /user [put]
-// @Security BearerAuth
+//	@Tags		User
+//	@Summary	create a user
+//	@Param		user	body		dto.UpsertUserDto	true	"Update User Based On Token"
+//	@Success	200		{object}	utils.HttpSuccess[dto.UpsertUserDto]
+//	@Failure	400		{object}	utils.HttpError
+//	@Failure	500		{object}	utils.HttpError
+//	@Router		/user [put]
+//	@Security	BearerAuth
 func (c *userController) UpdateUser(ctx *gin.Context) {
 	var dto dto.UpsertUserDto
 	err := ctx.BindJSON(&dto)
@@ -137,13 +137,13 @@ func (c *userController) UpdateUser(ctx *gin.Context) {
 }
 
 // DeleteUser godoc
-// @Tags     User
-// @Summary  delete current user based on JWT
-// @Success  200 {object} utils.HttpSuccess[string]
-// @Failure  400 {object} utils.HttpError
-// @Failure  500 {object} utils.HttpError
-// @Router   /user [delete]
-// @Security BearerAuth
+//	@Tags		User
+//	@Summary	delete current user based on JWT
+//	@Success	200	{object}	utils.HttpSuccess[string]
+//	@Failure	400	{object}	utils.HttpError
+//	@Failure	500	{object}	utils.HttpError
+//	@Router		/user [delete]
+//	@Security	BearerAuth
 func (c *userController) DeleteUser(ctx *gin.Context) {
 
 	userCredential, isExist := ctx.Get("user")

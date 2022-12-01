@@ -6,7 +6,7 @@ type TaskModel struct {
 	Description string `json:"description"`
 	Status      bool   `json:"status"`
 	UserID      uint   `json:"user_id"`
-	Category_id string `json:"category_id" gorm:"foreignKey:UserID;references:ID"`
+	CategoryID  string `json:"category_id" gorm:"foreignKey:CategoryID;references:ID"`
 }
 
 func (TaskModel) TableName() string {

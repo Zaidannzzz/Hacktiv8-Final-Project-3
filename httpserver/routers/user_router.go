@@ -9,7 +9,7 @@ import (
 )
 
 func UserRouter(route *gin.RouterGroup, userController controllers.UserController, authService utils.AuthHelper) *gin.RouterGroup {
-	userRouter := route.Group("/users")
+	userRouter := route.Group("/user")
 	{
 		userRouter.POST("register", userController.Register)
 		userRouter.POST("login", userController.Login)
