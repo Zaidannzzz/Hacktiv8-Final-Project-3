@@ -42,13 +42,18 @@ func NewUserController(
 //	@Router		/user/register [post]
 func (c *userController) Register(ctx *gin.Context) {
 	var dto dto.RegisterUserDto
+
+	if dto.Role == "" {
+		dto.Role = "member"
+	}
+
 	err := ctx.BindJSON(&dto)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, utils.NewHttpError("Bad Request", err.Error()))
 		return
 	}
 
-	_, err = c.userService.Register(&dto)
+	_, err = c.userService.RegisterUser(&dto)
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.NewHttpError("Internal Server Error", err.Error()))

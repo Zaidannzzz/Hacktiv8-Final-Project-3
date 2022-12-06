@@ -9,7 +9,8 @@ import (
 )
 
 type UserService interface {
-	Register(dto *dto.RegisterUserDto) (*models.UserModel, error)
+	RegisterUser(dto *dto.RegisterUserDto) (*models.UserModel, error)
+	RegisterAdmin(dto *dto.RegisterUserDto) (*models.UserModel, error)
 	Login(dto *dto.LoginDto) (*models.UserModel, error)
 	UpdateUser(dto *dto.UpsertUserDto) (*models.UserModel, error)
 	DeleteUser(user *models.UserModel) (bool, error)
@@ -23,7 +24,7 @@ func NewUserService(r repositories.UserRepository) *userService {
 	return &userService{r}
 }
 
-func (s *userService) Register(dto *dto.RegisterUserDto) (*models.UserModel, error) {
+func (s *userService) RegisterUser(dto *dto.RegisterUserDto) (*models.UserModel, error) {
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
 
@@ -37,6 +38,31 @@ func (s *userService) Register(dto *dto.RegisterUserDto) (*models.UserModel, err
 		Full_name: dto.Full_name,
 		Email:     dto.Email,
 		Password:  dto.Password,
+		Role:      "member",
+	}
+
+	_, err = s.userRepository.Register(&user)
+	if err != nil {
+		return &user, err
+	}
+	return &user, nil
+}
+
+func (s *userService) RegisterAdmin(dto *dto.RegisterUserDto) (*models.UserModel, error) {
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
+
+	if err != nil {
+		return nil, err
+	}
+
+	dto.Password = string(hashedPassword)
+
+	user := models.UserModel{
+		Full_name: dto.Full_name,
+		Email:     dto.Email,
+		Password:  dto.Password,
+		Role:      "admin",
 	}
 
 	_, err = s.userRepository.Register(&user)
