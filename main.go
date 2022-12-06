@@ -13,8 +13,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-
 	"github.com/joho/godotenv"
+
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
@@ -52,8 +52,13 @@ func main() {
 	categoryService := services.NewCategoryService(categoryRepository)
 	categoryController := controllers.NewCategoryController(categoryService)
 
+	taskRepository := repositories.NewTaskRepository(db)
+	taskService := services.NewTaskService(taskRepository)
+	taskController := controllers.NewTaskController(taskService)
+
 	routers.UserRouter(appRoute, userController, authService)
 	routers.CategoryRouter(appRoute, categoryController, authService)
+	routers.TaskRouter(appRoute, taskController, authService)
 
 	docs.SwaggerInfo.Title = "Hacktiv8 final-project-2 API"
 	docs.SwaggerInfo.Description = "This is just a simple TODO List"
