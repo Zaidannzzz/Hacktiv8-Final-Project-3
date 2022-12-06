@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"final-project-2/utils"
+	"hacktiv8-final-project-3/utils"
 	"net/http"
 	"strings"
 
