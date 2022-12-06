@@ -1,8 +1,8 @@
 package config
 
 import (
-	"final-project-2/httpserver/models"
 	"fmt"
+	"hacktiv8-final-project-3/httpserver/models"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -22,9 +22,8 @@ func Connect() (*gorm.DB, error) {
 	}
 	db.AutoMigrate(
 		&models.UserModel{},
-		&models.SocialMediaModel{},
-		&models.PhotoModel{},
-		&models.CommentModel{},
+		&models.TaskModel{},
+		&models.CategoryModel{},
 	)
 	return db, err
 }
