@@ -51,7 +51,7 @@ func (r *userRepository) Login(user *models.UserModel) (*models.UserModel, error
 }
 
 func (r *userRepository) UpdateUser(user *models.UserModel) (*models.UserModel, error) {
-	err := r.db.Model(user).Omit("Task", "Category").Updates(user).Error
+	err := r.db.Model(user).Where("email = ?", user.Email).Updates(user).Error
 
 	if err != nil {
 		return user, err

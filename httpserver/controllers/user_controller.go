@@ -41,7 +41,7 @@ func NewUserController(
 //	@Failure	500		{object}	utils.HttpError
 //	@Router		/user/register [post]
 func (c *userController) Register(ctx *gin.Context) {
-	var dto dto.UpsertUserDto
+	var dto dto.RegisterUserDto
 	err := ctx.BindJSON(&dto)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, utils.NewHttpError("Bad Request", err.Error()))
@@ -119,15 +119,7 @@ func (c *userController) UpdateUser(ctx *gin.Context) {
 		return
 	}
 
-	userCredential, isExist := ctx.Get("user")
-
-	if !isExist {
-		ctx.JSON(http.StatusBadRequest, utils.NewHttpError("Bad Request", errors.New("invalid credential")))
-		return
-	}
-
-	userModel := userCredential.(models.UserModel)
-	_, err = c.userService.UpdateUser(&dto, &userModel)
+	_, err = c.userService.UpdateUser(&dto)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.NewHttpError("Internal Server Error", err.Error()))
 		return

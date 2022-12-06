@@ -9,9 +9,9 @@ import (
 )
 
 type UserService interface {
-	Register(dto *dto.UpsertUserDto) (*models.UserModel, error)
+	Register(dto *dto.RegisterUserDto) (*models.UserModel, error)
 	Login(dto *dto.LoginDto) (*models.UserModel, error)
-	UpdateUser(dto *dto.UpsertUserDto, user *models.UserModel) (*models.UserModel, error)
+	UpdateUser(dto *dto.UpsertUserDto) (*models.UserModel, error)
 	DeleteUser(user *models.UserModel) (bool, error)
 }
 
@@ -23,7 +23,7 @@ func NewUserService(r repositories.UserRepository) *userService {
 	return &userService{r}
 }
 
-func (s *userService) Register(dto *dto.UpsertUserDto) (*models.UserModel, error) {
+func (s *userService) Register(dto *dto.RegisterUserDto) (*models.UserModel, error) {
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
 
@@ -60,22 +60,14 @@ func (s *userService) Login(dto *dto.LoginDto) (*models.UserModel, error) {
 	return result, nil
 }
 
-func (s *userService) UpdateUser(dto *dto.UpsertUserDto, user *models.UserModel) (*models.UserModel, error) {
-
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
-
-	if err != nil {
-		return nil, err
-	}
-
-	dto.Password = string(hashedPassword)
+func (s *userService) UpdateUser(dto *dto.UpsertUserDto) (*models.UserModel, error) {
 
 	userModel := models.UserModel{
 		Full_name: dto.Full_name,
 		Email:     dto.Email,
 	}
 
-	user, err = s.userRepository.UpdateUser(&userModel)
+	user, err := s.userRepository.UpdateUser(&userModel)
 
 	if err != nil {
 		return user, err
