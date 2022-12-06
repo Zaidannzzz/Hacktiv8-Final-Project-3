@@ -43,7 +43,7 @@ config/gorm.go // Database Configuration
 - Category
 - Setup Swaggo
 1. Muhammad Febri Andani
-- 
+- Tasks project
 1. Zaidan Zulhakim
 - User
 - Auth
