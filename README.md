@@ -1,7 +1,7 @@
 # Hacktiv8-Final-Project-3
 
 ## Overview
-This project is deployed at [URL](). Check Out Our API [Docs]().
+This project is deployed at [URL](https://hacktiv8-final-project-3-production-c895.up.railway.app/). Check Out Our API [Docs](https://hacktiv8-final-project-3-production-c895.up.railway.app/docs/index.html#/).
 
 ## Getting Started
 1. Clone this project or run ```git clone https://github.com/Zaidannzzz/Hacktiv8-Final-Project-3.git```

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"hacktiv8-final-project-3/config"
 	"hacktiv8-final-project-3/docs"
 	"hacktiv8-final-project-3/httpserver/controllers"
@@ -10,7 +9,6 @@ import (
 	"hacktiv8-final-project-3/httpserver/services"
 	"hacktiv8-final-project-3/utils"
 	"log"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -33,7 +31,6 @@ import (
 // @name                       Authorization
 func main() {
 	err := godotenv.Load(".env")
-	fmt.Println("PGHOST", os.Getenv("PGHOST"))
 
 	if err != nil {
 		log.Fatal("Environment Variables not found")
@@ -62,10 +59,10 @@ func main() {
 
 	docs.SwaggerInfo.Title = "Hacktiv8 final-project-2 API"
 	docs.SwaggerInfo.Description = "This is just a simple TODO List"
-	docs.SwaggerInfo.Host = "localhost:3030"
+	docs.SwaggerInfo.Host = "https://hacktiv8-final-project-3-production-c895.up.railway.app/"
 	docs.SwaggerInfo.BasePath = "/api"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	app.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	app.Run(":3030")
+	app.Run()
 }
